@@ -16,12 +16,7 @@ input_rect = pygame.Rect(200, 200, 140 ,32)
 color_active = pygame.Color('lightskyblue3')
 color_passive = pygame.Color('chartreuse4')
 color = color_passive
-active = False
 while(running):
-    if active:
-        color = color_active
-    else:
-        color = color_passive
     image = pygame.image.load("imgs/" +  str(counter) + ".png").convert()
     imageMask = pygame.image.load("imgs/" +  str(counter) + ".png").convert()
     screen = pygame.display.set_mode((image.get_width(), image.get_height()+32))
@@ -57,10 +52,10 @@ while(running):
                 user_text += event.unicode
         if event.type == pygame.MOUSEBUTTONDOWN:
             if input_rect.collidepoint(event.pos):
-                active = True
+                color = color_active
             else:
-                active = False
-                if user_text != '':
+                color = color_passive
+                if user_text != '' and user_text.isnumeric():
                     if (int(user_text) >= 1 and int(user_text) <= photoCount):
                         counter = int(user_text)
                     user_text = ""
