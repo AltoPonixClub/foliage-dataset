@@ -8,7 +8,7 @@ screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Viewer')
 running = True
 counter = 1;
-photoCunt = 715;
+photoCount = 715;
 alpha = 128
 base_font = pygame.font.Font(None, 32)
 user_text = ''
@@ -41,7 +41,7 @@ while(running):
         alpha -= 16
     elif keys[K_UP]:
         alpha += 16
-    elif keys[K_RIGHT] and counter != photoCunt:
+    elif keys[K_RIGHT] and counter != photoCount:
         counter += 1
         alpha = 128
     elif keys[K_LEFT] and counter != 1:
@@ -61,7 +61,7 @@ while(running):
             else:
                 active = False
                 if user_text != '':
-                    if (int(user_text) >= 1 and int(user_text) <= photoCunt):
+                    if (int(user_text) >= 1 and int(user_text) <= photoCount):
                         counter = int(user_text)
                     user_text = ""
 pygame.quit()
