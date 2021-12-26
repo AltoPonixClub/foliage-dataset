@@ -18,7 +18,7 @@ color_passive = pygame.Color('chartreuse4')
 color = color_passive
 while(running):
     image = pygame.image.load("imgs/" +  str(counter) + ".png").convert()
-    imageMask = pygame.image.load("masks/" +  str(counter) + ".png").convert()
+    imageMask = pygame.image.load("masks/" +  str(counter) + "_mask.png").convert()
     screen = pygame.display.set_mode((image.get_width(), image.get_height()+32))
     pygame.display.set_caption('Viewer ' + str(counter))
     screen.blit(image, (0, 0))
