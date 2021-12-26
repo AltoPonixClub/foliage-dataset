@@ -1,6 +1,7 @@
 import pygame
 from pygame import K_DOWN, K_UP, K_RIGHT, K_LEFT
 
+# TODO: someone needs to seriously clean this up
 pygame.init()
 width = 1900
 height = 1080
@@ -17,8 +18,15 @@ color_active = pygame.Color('lightskyblue3')
 color_passive = pygame.Color('chartreuse4')
 color = color_passive
 while(running):
-    image = pygame.image.load("imgs/" +  str(counter) + ".png").convert()
-    imageMask = pygame.image.load("masks/" +  str(counter) + "_mask.png").convert()
+    while True:
+        try:
+            print("Trying " + "imgs/" +  str(counter) + ".png")
+            image = pygame.image.load("imgs/" +  str(counter) + ".png").convert()
+            imageMask = pygame.image.load("masks/" +  str(counter) + "_mask.png").convert()
+            break
+        except Exception as e:
+            counter+=1
+
     screen = pygame.display.set_mode((image.get_width(), image.get_height()+32))
     pygame.display.set_caption('Viewer ' + str(counter))
     screen.blit(image, (0, 0))
