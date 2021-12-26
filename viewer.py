@@ -7,8 +7,8 @@ height = 1080
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption('Viewer')
 running = True
-counter = 1;
-photoCount = 715;
+counter = 1
+photoCount = 715
 alpha = 128
 base_font = pygame.font.Font(None, 32)
 user_text = ''
