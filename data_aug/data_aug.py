@@ -37,9 +37,5 @@ def brightness(filename, input_path, brightness_factor):
 		img = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
 		cv2.imwrite(filename[:-4]+"a"+".png", img)
 
-def contrast(filename, input_path, contrast_factor):
-	
-
-
 for filename in os.listdir(input_path):
 	brightness(filename, input_path, [1.2, 2.5])
