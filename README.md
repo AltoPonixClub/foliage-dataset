@@ -2,6 +2,6 @@
 
 ![](completion_badge.svg)
 
-Dataset for our foliage segnet
+Dataset for our foliage segnet. /data_aug includes material for image augmentation.
 
-To install requirements, use `pip3 install -r requirements.txt`. If encountering issues with installation of packages via requirements.txt, manually install scipy using `pip3 install scipy` after error. 
+To install requirements, use `pip3 install -r requirements.txt`.

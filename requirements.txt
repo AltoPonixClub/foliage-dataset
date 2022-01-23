@@ -1,5 +1,4 @@
-numpy
 anybadge
 pygame
-opencv-python
-scipy
+Pillow
+random
