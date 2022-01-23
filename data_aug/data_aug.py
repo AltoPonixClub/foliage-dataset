@@ -3,25 +3,11 @@ import numpy as np
 import os
 import random
 from PIL import Image, ImageEnhance
+import timeit
+
 
 input_path = "/Users/aniketjain/Desktop/Code/AltoPonix/foliage-dataset/data_aug"
 output_path = "/Users/aniketjain/Desktop/Code/AltoPonix/foliage-dataset/data_aug"
-
-def brightness(filename, input_path, brightness_factor, name):
-	if filename.endswith(".png"):
-		# Apply brightness augmentations and save to output_path
-		value = random.uniform(brightness_factor[0], brightness_factor[1])
-		print(filename, value)
-		img = cv2.imread(input_path + "/" + filename)
-		hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-		hsv = np.array(hsv, dtype = np.float64)
-		hsv[:,:,1] = hsv[:,:,1]*value
-		hsv[:,:,1][hsv[:,:,1]>255]  = 25
-		hsv[:,:,2] = hsv[:,:,2]*value 
-		hsv[:,:,2][hsv[:,:,2]>255]  = 255
-		hsv = np.array(hsv, dtype = np.uint8)
-		img = cv2.cvtColor(hsv, cv2.COLOR_HSV2BGR)
-		cv2.imwrite(filename[:-4]+ "_" + name + ".png", img)
 
 def contrast(filename, input_path, contrast_factor, name):
 	if filename.endswith(".png"):
@@ -32,6 +18,17 @@ def contrast(filename, input_path, contrast_factor, name):
 		# enhancer = ImageEnhance.Contrast(img)
 		# product = enhancer.enhance(factor)
 		# product.save(filename[:-4]+ "_" + name + ".png")
+
+def brightness(filename, input_path, brightness_factor, name):
+	if filename.endswith(".png"):
+		ImageEnhance.Brightness(Image.open(input_path + "/" + filename)).enhance(random.uniform(brightness_factor[0], brightness_factor[1])).save(filename[:-4]+ "_" + name + ".png")		# Apply brightness augmentations and save to output_path
+		# value = random.uniform(brightness_factor[0], brightness_factor[1])
+		# print(filename, value)
+		# img = Image.open(input_path + "/" + filename)
+		# enhancer = ImageEnhance.Brightness(img)
+		# product = enhancer.enhance(value)
+		# product.save(filename[:-4]+ "_" + name + ".png")
+
 
 for filename in os.listdir(input_path):
 	# Increase brightness in range I tested to be acceptable
