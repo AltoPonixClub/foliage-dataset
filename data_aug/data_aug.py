@@ -1,9 +1,6 @@
-import cv2
-import numpy as np
 import os
 import random
 from PIL import Image, ImageEnhance
-import timeit
 
 
 input_path = "/Users/aniketjain/Desktop/Code/AltoPonix/foliage-dataset/data_aug"
