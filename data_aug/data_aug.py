@@ -1,39 +1,52 @@
 import os
 import random
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageOps
 
 
 input_path = "/Users/aniketjain/Desktop/Code/AltoPonix/foliage-dataset/data_aug"
 output_path = "/Users/aniketjain/Desktop/Code/AltoPonix/foliage-dataset/data_aug"
 
 def contrast(filename, input_path, contrast_factor, name):
-	if filename.endswith(".png"):
-		ImageEnhance.Contrast(Image.open(input_path + "/" + filename)).enhance(random.uniform(contrast_factor[0], contrast_factor[1])).save(filename[:-4]+ "_" + name + ".png")
-		# Apply contrast augmentations and save to output_path
-		# factor = random.uniform(contrast_factor[0], contrast_factor[1])
-		# img = Image.open(input_path + "/" + filename)
-		# enhancer = ImageEnhance.Contrast(img)
-		# product = enhancer.enhance(factor)
-		# product.save(filename[:-4]+ "_" + name + ".png")
+	ImageEnhance.Contrast(Image.open(input_path + "/" + filename)).enhance(random.uniform(contrast_factor[0], contrast_factor[1])).save(filename[:-4]+ "_" + name + ".png")
+	# Apply contrast augmentations and save to output_path
+	# factor = random.uniform(contrast_factor[0], contrast_factor[1])
+	# img = Image.open(input_path + "/" + filename)
+	# enhancer = ImageEnhance.Contrast(img)
+	# product = enhancer.enhance(factor)
+	# product.save(filename[:-4]+ "_" + name + ".png")
 
 def brightness(filename, input_path, brightness_factor, name):
-	if filename.endswith(".png"):
-		ImageEnhance.Brightness(Image.open(input_path + "/" + filename)).enhance(random.uniform(brightness_factor[0], brightness_factor[1])).save(filename[:-4]+ "_" + name + ".png")		# Apply brightness augmentations and save to output_path
-		# value = random.uniform(brightness_factor[0], brightness_factor[1])
-		# print(filename, value)
-		# img = Image.open(input_path + "/" + filename)
-		# enhancer = ImageEnhance.Brightness(img)
-		# product = enhancer.enhance(value)
-		# product.save(filename[:-4]+ "_" + name + ".png")
+	ImageEnhance.Brightness(Image.open(input_path + "/" + filename)).enhance(random.uniform(brightness_factor[0], brightness_factor[1])).save(filename[:-4]+ "_" + name + ".png")		# Apply brightness augmentations and save to output_path
+	# value = random.uniform(brightness_factor[0], brightness_factor[1])
+	# print(filename, value)
+	# img = Image.open(input_path + "/" + filename)
+	# enhancer = ImageEnhance.Brightness(img)
+	# product = enhancer.enhance(value)
+	# product.save(filename[:-4]+ "_" + name + ".png")
+
+def posterize(filename, input_path, bits, name): # Reduce color in an image. Basically deep fries it
+	ImageOps.posterize(Image.open(input_path + "/" + filename).convert('RGB'), bits).save(filename[:-4]+ "_" + name + ".png")
+	# posterize / deep fry the image
+	# img = Image.open(input_path + "/" + filename)
+	# img = img.convert('RGB') # bc posterize only works on RGB images and PNG doesn't count
+	# img = ImageOps.posterize(img, bits)
+	# img.save(filename[:-4]+ "_" + name + ".png")
 
 
 for filename in os.listdir(input_path):
-	# Increase brightness in range I tested to be acceptable
-	brightness(filename, input_path, [1.2, 2.5], "a") 
-	# Decrease contrast in range I tested to be acceptable
-	contrast(filename, input_path, [0.2, 0.8], "b")
+	if filename.endswith(".png"):
+		# Increase brightness in range I tested to be acceptable
+		brightness(filename, input_path, [1.2, 2.5], "a") 
+		# Decrease contrast in range I tested to be acceptable
+		contrast(filename, input_path, [0.2, 0.8], "b")
+		# Decrease color in image to certain number of bits per channel. Higher number = less deep fried
+		posterize(filename, input_path, 8, "c")
 
 
+
+# import PIL.ImageOps
+# import cv2
+# import numpy as np
 # from scipy.ndimage.filters import gaussian_filter
 
 # img = cv2.resize(cv2.imread("Checkerboard.png"), (480, 360))
